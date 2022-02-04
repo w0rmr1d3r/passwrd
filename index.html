@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS 5.0.2 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <script type="application/javascript">
+        function generatePassword() {
+            /*
+            Password will always include numbers and letters.
+            Symbols are optionals.
+            */
+            numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+            letters = ["a", "b", "c", "d", "e", "f", "g", "h","i","j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "x", "y", "z"]
+            symbols = ["@", "#", "$", "%", "!", "&", "=", "*", "+", "-", "_"]
+
+
+            range = document.getElementById('password-range-output').value;
+            range = range === "" ? 32 : range;
+
+            includeSymbols = document.getElementById('include-symbols').checked;
+
+            possibleSetOfValues = includeSymbols ? [numbers, letters, symbols] : [numbers, letters];
+
+            password = "";
+
+            for (let i = 0; i < range; i++) {
+                selectedSetRandom = randomNumberFromZeroToLength(possibleSetOfValues.length);
+                selectedSet = possibleSetOfValues[selectedSetRandom]
+                selectedCharacterRandom = randomNumberFromZeroToLength(selectedSet.length);
+                passwordValue = selectedSet[selectedCharacterRandom];
+                password += passwordValue;
+            }
+
+            document.getElementById('password-generated').value = password;
+        }
+
+        function randomNumberFromZeroToLength(length) {
+            return Math.floor(Math.random() * length);
+        }
+
+        function copyToClipboard() {
+            /* Get the text field */
+            var copyText = document.getElementById("password-generated");
+            /* Select the text field */
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /* For mobile devices */
+            /* Copy the text inside the text field */
+            navigator.clipboard.writeText(copyText.value);
+        }
+
+        function setDefaultValueToPasswordRangeOutput(){
+            document.getElementById('password-range-output').value = 32;
+        }
+    </script>
+
+    <title>passwrd</title>
+</head>
+
+    <!-- todo about section and such only a github logo pointing to the repo-->
+
+<body onload="generatePassword();setDefaultValueToPasswordRangeOutput();">
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">passwrd</span>
+        </div>
+    </nav>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3>Select password range</h3>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-8 input-group">
+                <p class="form-label">Password range:&nbsp;</p>
+                <output id="password-range-output"></output>
+                <input type="range" class="form-range" value="32" min="16" max="100" oninput="this.previousElementSibling.value=this.value">
+            </div>
+            <div class="col"></div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col">
+                <h3>Select other options</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-8 form-check form-switch">
+                <label class="form-check-label" for="include-symbols">Include symbols</label>
+                <input class="form-check-input" type="checkbox" id="include-symbols" checked>
+            </div>
+            <div class="col"></div>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-8 input-group">
+                <input class="form-control" type="text" id="password-generated" value="click the button below"
+                    aria-label="password-generated" readonly>
+                <span class="input-group-text" id="copy-span" onclick="copyToClipboard()">copy</span>
+            </div>
+            <div class="col"></div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-6">
+                <button type="button" class="btn btn-success" onclick="generatePassword()">Generate password</button>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+
+    <!-- Popper and Bootstrap JS 5.0.2 -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+</body>
+</html>
