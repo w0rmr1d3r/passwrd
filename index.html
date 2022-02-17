@@ -42,6 +42,7 @@
             }
 
             document.getElementById('password-generated').value = password;
+            changeCopyButtonTextToCopy();
         }
 
         function randomNumberFromZeroToLength(length) {
@@ -56,6 +57,18 @@
             copyText.setSelectionRange(0, 99999); /* For mobile devices */
             /* Copy the text inside the text field */
             navigator.clipboard.writeText(copyText.value);
+            changeCopyButtonTextToCopied();
+        }
+
+        function changeCopyButtonTextToCopy() {
+            var currentValue = document.getElementById("copy-button").innerHTML;
+            if (currentValue !== "copy") {
+                document.getElementById("copy-button").innerHTML = "copy";
+            }
+        }
+
+        function changeCopyButtonTextToCopied() {
+            document.getElementById("copy-button").innerHTML = "copied";
         }
 
         function setDefaultValueToPasswordRangeOutput(){
@@ -112,8 +125,8 @@
         <div class="row">
             <div class="col"></div>
             <div class="col-8 input-group">
-                <input class="form-control" type="text" id="password-generated" value="click the button below" aria-label="password-generated" readonly>
-                <span class="input-group-text" id="copy-span" onclick="copyToClipboard()">copy</span>
+                <input class="form-control" type="text" id="password-generated" aria-label="password-generated" readonly>
+                <button class="btn btn-outline-secondary" type="button" id="copy-button" onclick="copyToClipboard()">copy</button>
             </div>
             <div class="col"></div>
         </div>
@@ -124,7 +137,6 @@
             </div>
         </div>
     </div>
-
     <footer class="container-fluid fixed-bottom">
         <div class="d-flex justify-content-center">
             <address>
@@ -132,7 +144,6 @@
             </address>
         </div>
     </footer>
-
     <!-- Popper and Bootstrap JS 5.0.2 -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
