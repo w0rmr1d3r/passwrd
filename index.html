@@ -20,7 +20,7 @@
             */
             numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
             letters = ["a", "b", "c", "d", "e", "f", "g", "h","i","j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "x", "y", "z"]
-            capitalLetters = letters.map(element => {return element.toUpperCase();});
+            upperCaseLetters = letters.map(element => {return element.toUpperCase();});
             symbols = ["@", "#", "$", "%", "!", "&", "=", "*", "+", "-", "_"]
 
             range = document.getElementById('password-range-output').value;
@@ -28,7 +28,7 @@
 
             includeSymbols = document.getElementById('include-symbols').checked;
 
-            possibleSetOfValues = includeSymbols ? [numbers, letters, capitalLetters, symbols] : [numbers, letters, capitalLetters];
+            possibleSetOfValues = includeSymbols ? [numbers, letters, upperCaseLetters, symbols] : [numbers, letters, upperCaseLetters];
 
             password = "";
 
@@ -53,7 +53,8 @@
             var copyText = document.getElementById("password-generated");
             /* Select the text field */
             copyText.select();
-            copyText.setSelectionRange(0, 99999); /* For mobile devices */
+			/* For mobile devices */
+            copyText.setSelectionRange(0, 99999); 
             /* Copy the text inside the text field */
             navigator.clipboard.writeText(copyText.value);
             changeCopyButtonTextToCopied();
@@ -67,7 +68,7 @@
         }
 
         function changeCopyButtonTextToCopied() {
-            document.getElementById("copy-button").innerHTML = "copied";
+            document.getElementById("copy-button").innerHTML = "copied!";
         }
 
         function setDefaultValueToPasswordRangeOutput(){
@@ -92,30 +93,30 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h3>Select password range</h3>
+                <h3>Password range</h3>
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col"></div>
             <div class="col-8 input-group">
-                <p class="form-label">Password range:&nbsp;</p>
+                <p class="form-label">Selected range:&nbsp;</p>
                 <output id="password-range-output"></output>
-                <input type="range" class="form-range" value="32" min="16" max="100" oninput="this.previousElementSibling.value=this.value">
+                <input type="range" class="form-range" value="32" min="8" max="100" oninput="this.previousElementSibling.value=this.value" onchange="generatePassword()">
             </div>
             <div class="col"></div>
         </div>
         <br>
         <div class="row">
             <div class="col">
-                <h3>Select other options</h3>
+                <h3>Other options</h3>
             </div>
         </div>
         <div class="row">
             <div class="col">
                 <div class="form-check form-switch">
                     <label class="form-check-label" for="include-symbols">Include symbols</label>
-                    <input class="form-check-input" type="checkbox" id="include-symbols" checked>
+                    <input class="form-check-input" type="checkbox" id="include-symbols" checked onchange="generatePassword()">
                 </div>
             </div>
         </div>
