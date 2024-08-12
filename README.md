@@ -1,4 +1,5 @@
 # passwrd
+
 Simple website to create random strong passwords
 
 ## Sponsors
