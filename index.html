@@ -51,7 +51,7 @@
             var copyText = document.getElementById("password-generated");
             /* Select the text field */
             copyText.select();
-			/* For mobile devices */
+            /* For mobile devices */
             copyText.setSelectionRange(0, 99999); 
             /* Copy the text inside the text field */
             navigator.clipboard.writeText(copyText.value);
@@ -100,7 +100,7 @@
             <div class="col-8 input-group">
                 <p class="form-label">Selected range:&nbsp;</p>
                 <output id="password-range-output"></output>
-                <input type="range" class="form-range" value="32" min="8" max="100" oninput="this.previousElementSibling.value=this.value" onchange="generatePassword()">
+                <input type="range" class="form-range" value="32" min="8" max="128" oninput="this.previousElementSibling.value=this.value" onchange="generatePassword()">
             </div>
             <div class="col"></div>
         </div>
